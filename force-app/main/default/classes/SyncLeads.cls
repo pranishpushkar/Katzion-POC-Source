@@ -6,8 +6,6 @@ public with sharing class SyncLeads {
     @AuraEnabled
     public static String syncLeadsToTarget(List<Id> leadIds) {
 
-        //Just a Comment.
-
         List<Lead> leadsToSync = [Select FirstName, LastName, Company, LeadSource, Email, Status, Rating from Lead where Id IN :leadIds];
 
         if(leadsToSync.isEmpty()){
