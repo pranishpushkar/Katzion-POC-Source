@@ -1,0 +1,74 @@
+<template>
+    <lightning-card title="Display and Sync Leads" icon-name="standard:lead">
+        <div class="slds-m-around_medium">
+            <lightning-layout class="slds-m-bottom_small" horizontal-align="space">
+                <lightning-layout-item size="4" padding="horizontal_small">
+                    <lightning-input
+                        type="search"
+                        label="Search leads by Name"
+                        onchange={handleSearchChange}
+                        value={searchKey}>
+                    </lightning-input>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="3" padding="horizontal_small">
+                    <lightning-combobox
+                        label="Filter by Lead Source"
+                        value={leadSourceFilter}
+                        options={leadSourceOptions}
+                        onchange={handleSourceChange}>
+                    </lightning-combobox>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="2" padding="horizontal_small">
+                    <lightning-combobox
+                        label="Records Per Page"
+                        value={pageSize}
+                        options={pageSizeOptions}
+                        onchange={handlePageSizeChange}>
+                    </lightning-combobox>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="3" padding="horizontal_small" class="slds-align_absolute-center">
+                    <lightning-button
+                        label="Sync Selected Leads"
+                        onclick={syncLeads}
+                        variant="brand"
+                        disabled={isSyncDisabled}>
+                    </lightning-button>
+                </lightning-layout-item>
+            </lightning-layout>
+            <div if:true={leads}>
+                <lightning-datatable
+                key-field="Id"
+                data={leads}
+                columns={columns}
+                onrowselection={handleRowSelection}
+                show-row-number-column
+                enable-infinite-loading>
+            </lightning-datatable>
+            </div>
+
+            <div if:false={leads} class="slds-align_absolute-center slds-m-vertical_large">
+                <template if:true={isLoading}>
+                    <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+                </template>
+                <template if:false={isLoading}>
+                    <p>No Leads Found</p>
+                </template>
+            </div>
+
+            <lightning-layout class="slds-m-top_small" horizontal-align="center">
+                <lightning-layout-item>
+                    <c-paginator
+                        onprevious={handlePrevious}
+                        onnext={handleNext}
+                        page-number={pageNumber}
+                        total-records={totalRecords}
+                        page-size={pageSize}>
+                    </c-paginator>      
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </lightning-card>
+</template>

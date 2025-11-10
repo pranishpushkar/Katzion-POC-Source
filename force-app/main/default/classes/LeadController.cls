@@ -43,5 +43,19 @@ public with sharing class LeadController {
         return results;
 
     }
+
+    @AuraEnabled(cacheable=true)
+    public static List<String> getLeadSources(){
+        List<String> sources = new List<String>();
+        sources.add('All');
+
+        Schema.DescribeFieldResult fieldResult = Lead.LeadSource.getDescribe();
+        List<Schema.PicklistEntry> ple = fieldResult.getPicklistValues();
+
+        for(Schema.PicklistEntry p : ple){
+            sources.add(p.getLabel());
+        }
+        return sources;
+    }
     
 }
