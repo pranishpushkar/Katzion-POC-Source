@@ -4,7 +4,9 @@ public with sharing class SyncLeads {
     private static final String endpoint = '/services/apexrest/LeadReceiver/';
 
     @AuraEnabled
-    public static String SyncLeadsToTarget(List<Id> leadIds) {
+    public static String syncLeadsToTarget(List<Id> leadIds) {
+
+        //Just a Comment.
 
         List<Lead> leadsToSync = [Select FirstName, LastName, Company, LeadSource, Email, Status, Rating from Lead where Id IN :leadIds];
 
