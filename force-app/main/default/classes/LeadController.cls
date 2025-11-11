@@ -5,9 +5,12 @@ public with sharing class LeadController {
     @AuraEnabled(cacheable=true)
     public static Map<String, Object> getLeads(Integer pageSize, Integer pageNumber, String searchKey,String leadSource){
 
+        System.debug('Lead Source: '+leadSource);
+        System.debug('Search Key: '+ searchKey);
+
         String query = 'Select Id, Name, Company, LeadSource, Email from Lead';
 
-        if(leadSource == null){
+        if(leadSource == 'All'){
         if(searchKey != null && searchKey.length()>0){
             query += ' where Name LIKE \'%' + String.escapeSingleQuotes(searchKey) + '%\''; 
         }

@@ -1,23 +1,23 @@
 <template>
     <div class="slds-grid slds-grid_align-center slds-m-vertical_small">
-        <lightning-button
-        label="Previous"
-        icon-name="utility:chevronleft"
-        onclick={previousHandler}
-        disabled={isFirstPage}
-        class="slds-m-right_x-small">
+        <lightning-button 
+            label="Previous" 
+            icon-name="utility:chevronleft"
+            onclick={previousHandler}
+            disabled={isFirstPage}
+            class="slds-m-right_x-small">
         </lightning-button>
 
         <span class="slds-text-heading_small slds-m-horizontal_medium">
-            Page: {pageNumber} of {totalPages}
+            Page {pageNumber} of {totalPages}
         </span>
 
-        <lightning-button
-        label="Next"
-        icon-name="utility:chevronright"
-        onclick={nexthandler}
-        disabled={islastpage}>
+        <lightning-button 
+            label="Next" 
+            icon-name="utility:chevronright"
+            icon-position="right"
+            onclick={nextHandler}
+            disabled={isLastPage}>
         </lightning-button>
     </div>
-    
 </template>

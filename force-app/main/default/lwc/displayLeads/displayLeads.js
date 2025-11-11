@@ -62,7 +62,7 @@ export default class DisplayLeads extends LightningElement {
             pageSize: this.pageSize,
             pageNumber: this.pageNumber,
             searchKey: this.searchKey,
-            leadSourceFilter: this.leadSourceFilter
+            leadSource: this.leadSourceFilter
         })
         .then(result => {
             this.leads = result.leads;
@@ -91,13 +91,17 @@ export default class DisplayLeads extends LightningElement {
     }
 
     handleSourceChange(event){
+        console.log('Inside Handle Source Change');
         this.leadSourceFilter = event.detail.value;
+        console.log(event.detail.value);
+        console.log(this.leadSourceFilter);
         this.pageNumber = 1;
         this.fetchLeads();
     }
 
     handlePageSizeChange(event){
         this.pageSize = parseInt(event.detail.value, 10);
+        console.log(this.pageSize);
         this.pageNumber = 1;
         this.fetchLeads();
     }
@@ -108,7 +112,9 @@ export default class DisplayLeads extends LightningElement {
     }
 
     handleNext(){
+        console.log('Inside Display Leads Handle Next');
         this.pageNumber = this.pageNumber + 1;
+        this.fetchLeads();
     }
 
     syncLeads(){
